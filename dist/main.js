@@ -168,6 +168,15 @@ var StepZilla = function (_Component) {
     value: function jumpToStep(evt) {
       var _this3 = this;
 
+      //implement logic to always grab the li element aka the parent node:
+      //the parent node has attributes that 'jumpToStep()' needs to execute properly
+      //#added in new code for the profile tabs - an 9/27
+      if (evt && evt.target && evt.target.nodeName !== "LI") {
+        evt.target = evt.target.parentNode;
+        // console.log('AFTER: evt', evt, 'evt.target', evt.target, 'evt.target.value' ,evt.target.value);
+      }
+      //#end of new code
+
       if (evt.target == undefined) {
         // a child step wants to invoke a jump between steps. in this case 'evt' is the numeric step number and not the JS event
         this.setNavState(evt);
